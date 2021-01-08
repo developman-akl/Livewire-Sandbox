@@ -22,13 +22,14 @@ class OrderController extends Controller
 
         foreach ($request->orderProducts as $product) {
             $order
-            ->products()
-            ->attach(
-                $product['product_id'],
-                [
-                    'quantity' => $product['quantity'],
-                    'delivery_date' => $product['delivery_date'],
-                ]);
+                ->products()
+                ->attach(
+                    $product['product_id'],
+                    [
+                        'quantity' => $product['quantity'],
+                        'delivery_date' => $product['delivery_date'],
+                    ]
+                );
         }
 
         session()->flash('message', 'Order stored successfully!');
