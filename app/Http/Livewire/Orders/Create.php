@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Orders;
 
 use App\Models\Product;
 use Livewire\Component;
 
-class Products extends Component
+class Create extends Component
 {
     public $orderProducts = [];
     public $allProducts = [];
@@ -37,7 +37,7 @@ class Products extends Component
 
     public function render()
     {
-        info($this->orderProducts);
-        return view('livewire.products');
+        // info($this->orderProducts);
+        return view('livewire.orders.create');
     }
 }

@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Create Orders') }}</div>
 
                 <div class="card-body">
-                    @livewire('orders.create')
+                    @livewire('products.index')
                 </div>
             </div>
         </div>
