@@ -15,6 +15,7 @@
                     @endif
 
                     <div class="list-group">
+                        {{-- <a href="{{ route('orders.index') }}" class="list-group-item list-group-item-action">Orders List</a> --}}
                         <a href="{{ route('orders.index') }}" class="list-group-item list-group-item-action">Orders List</a>
                         <a href="{{ route('orders.create') }}" class="list-group-item list-group-item-action">Create Order</a>
                         <a href="{{ route('products') }}" class="list-group-item list-group-item-action">Products</a>

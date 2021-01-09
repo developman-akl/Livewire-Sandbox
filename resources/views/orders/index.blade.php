@@ -10,7 +10,7 @@
                 <a href="{{ route('orders.create') }}" class="btn btn-primary">{{ __('Create New Order') }}</a>
 
                 <div class="card-body">
-                    <div>
+                    {{-- <div>
                         <table class="table table-stripped mt-3">
                             <tr>
                                 <th>Id</th>
@@ -29,7 +29,9 @@
                                 </tr>
                             @endforeach
                         </table>
-                    </div>
+                    </div> --}}
+
+                    <livewire:users-table />
                 </div>
             </div>
         </div>
