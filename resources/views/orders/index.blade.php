@@ -31,7 +31,7 @@
                         </table>
                     </div> --}}
 
-                    <livewire:users-table />
+                    <livewire:orders.orders-table />
                 </div>
             </div>
         </div>
