@@ -61,23 +61,48 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="number"
-                                       name="orderProducts[{{$index}}][quantity]"
-                                       class="form-control"
-                                       wire:model="orderProducts.{{$index}}.quantity" />
+                                <input 
+                                    class="form-control"
+                                    type="number"
+                                    name="orderProducts[{{$index}}][quantity]"
+                                    wire:model="orderProducts.{{$index}}.quantity" 
+                                />
                             </td>
                             <td>
-                                <input 
+                                {{-- BOOTSTRAP DATEPICKER --}}
+                                {{-- <input 
                                     wire:model="orderProducts.{{$index}}.delivery_date"
-                                    class="form-control date" 
+                                    class="form-control datepicker" 
                                     type="text" 
                                     name="orderProducts[{{$index}}][delivery_date]" 
                                     placeholder="ÉÉÉÉ-HH-NN"
                                     autocomplete="off"
-                                    data-provide="datepicker" data-date-autoclose="true" 
-                                    data-date-format="yyyy-mm-dd" data-date-today-highlight="true" 
+                                    data-provide="datepicker"
+                                    data-date-autoclose="true" 
+                                    data-date-format="yyyy-mm-dd"
+                                    data-date-today-highlight="true" 
                                     onchange="this.dispatchEvent(new InputEvent('input'))"
-                                >
+                                > --}}
+
+                                {{-- HTML DATEPICKER --}}
+                                {{-- <input 
+                                    class="form-control" 
+                                    type="text"
+                                    id="datepickercucc" 
+                                    wire:model="orderProducts.{{$index}}.delivery_date" 
+                                    name="orderProducts[{{$index}}][delivery_date]"
+                                    onchange="this.dispatchEvent(new InputEvent('input'))"
+                                > --}}
+
+                                
+                                {{-- ALPINEJS DATE-PICKER COMPONENT --}}
+                                <x-date-picker 
+                                    id="datepickercucc"
+                                    name="orderProducts[{{$index}}][delivery_date]"
+                                    wire:model="orderProducts.{{$index}}.delivery_date"
+                                />
+              
+
                             </td>
                             <td>
                                 <a class="btn btn-danger" href="#" wire:click.prevent="removeProduct({{$index}})">Delete</a>

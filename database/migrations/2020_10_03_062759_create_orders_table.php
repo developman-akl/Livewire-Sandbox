@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('customer_name');
             $table->string('customer_email');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

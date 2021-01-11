@@ -18,6 +18,7 @@ class CreateOrderProductTable extends Migration
             $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
             $table->date('delivery_date');
+            $table->softDeletes();
         });
     }
 

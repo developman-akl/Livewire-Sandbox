@@ -14576,6 +14576,40 @@
         class Str {
          
     }
+            /**
+     * 
+     *
+     */ 
+        class Collection {
+                    /**
+         * 
+         *
+         * @see \Maatwebsite\Excel\Mixins\DownloadCollection::downloadExcel()
+         * @param string $fileName
+         * @param string|null $writerType
+         * @param mixed $withHeadings
+         * @static 
+         */ 
+        public static function downloadExcel($fileName, $writerType = null, $withHeadings = false)
+        {
+                        return \Illuminate\Support\Collection::downloadExcel($fileName, $writerType, $withHeadings);
+        }
+                    /**
+         * 
+         *
+         * @see \Maatwebsite\Excel\Mixins\StoreCollection::storeExcel()
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string|null $writerType
+         * @param mixed $withHeadings
+         * @static 
+         */ 
+        public static function storeExcel($filePath, $disk = null, $writerType = null, $withHeadings = false)
+        {
+                        return \Illuminate\Support\Collection::storeExcel($filePath, $disk, $writerType, $withHeadings);
+        }
+         
+    }
      
 }
 
@@ -15002,6 +15036,238 @@
      
 }
 
+    namespace Maatwebsite\Excel\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class Excel {
+                    /**
+         * 
+         *
+         * @param object $export
+         * @param string|null $fileName
+         * @param string $writerType
+         * @param array $headers
+         * @throws \PhpOffice\PhpSpreadsheet\Exception
+         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+         * @return \Symfony\Component\HttpFoundation\BinaryFileResponse 
+         * @static 
+         */ 
+        public static function download($export, $fileName, $writerType = null, $headers = [])
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->download($export, $fileName, $writerType, $headers);
+        }
+                    /**
+         * 
+         *
+         * @param object $export
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string $writerType
+         * @param mixed $diskOptions
+         * @throws \PhpOffice\PhpSpreadsheet\Exception
+         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+         * @return bool 
+         * @static 
+         */ 
+        public static function store($export, $filePath, $diskName = null, $writerType = null, $diskOptions = [])
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->store($export, $filePath, $diskName, $writerType, $diskOptions);
+        }
+                    /**
+         * 
+         *
+         * @param object $export
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string $writerType
+         * @param mixed $diskOptions
+         * @return \Illuminate\Foundation\Bus\PendingDispatch 
+         * @static 
+         */ 
+        public static function queue($export, $filePath, $disk = null, $writerType = null, $diskOptions = [])
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->queue($export, $filePath, $disk, $writerType, $diskOptions);
+        }
+                    /**
+         * 
+         *
+         * @param object $export
+         * @param string $writerType
+         * @return string 
+         * @static 
+         */ 
+        public static function raw($export, $writerType)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->raw($export, $writerType);
+        }
+                    /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Symfony\Component\HttpFoundation\File\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return \Maatwebsite\Excel\Reader|\Illuminate\Foundation\Bus\PendingDispatch 
+         * @static 
+         */ 
+        public static function import($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->import($import, $filePath, $disk, $readerType);
+        }
+                    /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Symfony\Component\HttpFoundation\File\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return array 
+         * @static 
+         */ 
+        public static function toArray($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->toArray($import, $filePath, $disk, $readerType);
+        }
+                    /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Symfony\Component\HttpFoundation\File\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return \Maatwebsite\Excel\Collection 
+         * @static 
+         */ 
+        public static function toCollection($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->toCollection($import, $filePath, $disk, $readerType);
+        }
+                    /**
+         * 
+         *
+         * @param \Maatwebsite\Excel\ShouldQueue $import
+         * @param string|\Symfony\Component\HttpFoundation\File\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string $readerType
+         * @return \Illuminate\Foundation\Bus\PendingDispatch 
+         * @static 
+         */ 
+        public static function queueImport($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->queueImport($import, $filePath, $disk, $readerType);
+        }
+                    /**
+         * 
+         *
+         * @param string $concern
+         * @param callable $handler
+         * @param string $event
+         * @static 
+         */ 
+        public static function extend($concern, $handler, $event = 'Maatwebsite\\Excel\\Events\\BeforeWriting')
+        {
+                        return \Maatwebsite\Excel\Excel::extend($concern, $handler, $event);
+        }
+                    /**
+         * When asserting downloaded, stored, queued or imported, use regular expression
+         * to look for a matching file path.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function matchByRegex()
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        $instance->matchByRegex();
+        }
+                    /**
+         * When asserting downloaded, stored, queued or imported, use regular string
+         * comparison for matching file path.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function doNotMatchByRegex()
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        $instance->doNotMatchByRegex();
+        }
+                    /**
+         * 
+         *
+         * @param string $fileName
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertDownloaded($fileName, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertDownloaded($fileName, $callback);
+        }
+                    /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertStored($filePath, $disk = null, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertStored($filePath, $disk, $callback);
+        }
+                    /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertQueued($filePath, $disk = null, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertQueued($filePath, $disk, $callback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function assertQueuedWithChain($chain)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertQueuedWithChain($chain);
+        }
+                    /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertImported($filePath, $disk = null, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertImported($filePath, $disk, $callback);
+        }
+         
+    }
+     
+}
+
     namespace Illuminate\Http { 
             /**
      * 
@@ -15215,6 +15481,75 @@
         public static function slot($slot)
         {
                         return \Illuminate\View\View::slot($slot);
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Query { 
+            /**
+     * 
+     *
+     */ 
+        class Builder {
+                    /**
+         * 
+         *
+         * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadBuilderMacros()
+         * @param mixed $params
+         * @static 
+         */ 
+        public static function leftJoinIfNotJoined(...$params)
+        {
+                        return \Illuminate\Database\Query\Builder::leftJoinIfNotJoined(...$params);
+        }
+                    /**
+         * 
+         *
+         * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadBuilderMacros()
+         * @param mixed $params
+         * @static 
+         */ 
+        public static function groupIfNotGrouped(...$params)
+        {
+                        return \Illuminate\Database\Query\Builder::groupIfNotGrouped(...$params);
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Eloquent\Relations { 
+            /**
+     * 
+     *
+     * @mixin \Illuminate\Database\Eloquent\Builder
+     */ 
+        class Relation {
+                    /**
+         * 
+         *
+         * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadRelationMacros()
+         * @param \Illuminate\Database\Eloquent\Builder $query
+         * @param \Illuminate\Database\Eloquent\Builder $parentQuery
+         * @param mixed $aggregate
+         * @param mixed $column
+         * @static 
+         */ 
+        public static function getRelationExistenceAggregatesQuery($query, $parentQuery, $aggregate, $column)
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::getRelationExistenceAggregatesQuery($query, $parentQuery, $aggregate, $column);
+        }
+                    /**
+         * 
+         *
+         * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadRelationMacros()
+         * @static 
+         */ 
+        public static function getRelationCountHashWithoutIncrementing()
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::getRelationCountHashWithoutIncrementing();
         }
          
     }
@@ -16392,6 +16727,37 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->explain();
+            }
+             
+                /**
+             * 
+             *
+             * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadEloquentBuilderMacros()
+             * @param mixed $relations
+             * @param mixed $aggregate
+             * @param mixed $column
+             * @param mixed $alias
+             * @static 
+             */ 
+            public static function customWithAggregate($relations, $aggregate, $column, $alias = null)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::customWithAggregate($relations, $aggregate, $column, $alias);
+            }
+             
+                /**
+             * 
+             *
+             * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadEloquentBuilderMacros()
+             * @param mixed $relation
+             * @param mixed $column
+             * @param mixed $aggregate
+             * @param mixed $operator
+             * @param mixed $count
+             * @static 
+             */ 
+            public static function hasAggregate($relation, $column, $aggregate, $operator = '>=', $count = 1)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::hasAggregate($relation, $column, $aggregate, $operator, $count);
             }
              
                 /**
@@ -18309,6 +18675,30 @@ namespace  {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->macroCall($method, $parameters);
             }
+             
+                /**
+             * 
+             *
+             * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadBuilderMacros()
+             * @param mixed $params
+             * @static 
+             */ 
+            public static function leftJoinIfNotJoined(...$params)
+            {
+                                return \Illuminate\Database\Query\Builder::leftJoinIfNotJoined(...$params);
+            }
+             
+                /**
+             * 
+             *
+             * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadBuilderMacros()
+             * @param mixed $params
+             * @static 
+             */ 
+            public static function groupIfNotGrouped(...$params)
+            {
+                                return \Illuminate\Database\Query\Builder::groupIfNotGrouped(...$params);
+            }
                     }
             class Event extends \Illuminate\Support\Facades\Event {}
             class File extends \Illuminate\Support\Facades\File {}
@@ -18334,6 +18724,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Livewire extends \Livewire\Livewire {}
+            class Excel extends \Maatwebsite\Excel\Facades\Excel {}
      
 }
 
