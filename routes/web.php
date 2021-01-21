@@ -22,10 +22,14 @@ Route::redirect('/', '/login');
 
 Auth::routes();
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+// Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route::group(['prefix' => '', 'as' => 'admin.', 'middleware' => ['auth']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+    Route::post('orders/parse-csv-import', [OrderController::class, 'parseCsvImport'])->name('orders.parseCsvImport');
+    Route::post('orders/process-csv-import', [OrderController::class, 'processCsvImport'])->name('orders.processCsvImport');
     Route::resource('orders', OrderController::class);
 
     Route::get('products', [ProductController::class, 'index'])->name('products');

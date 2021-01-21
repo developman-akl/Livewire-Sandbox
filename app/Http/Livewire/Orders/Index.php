@@ -3,56 +3,56 @@
 namespace App\Http\Livewire\Orders;
 
 use App\Models\Order;
-use Mediconesystems\LivewireDatatables\Column;
-use Mediconesystems\LivewireDatatables\DateColumn;
-use Mediconesystems\LivewireDatatables\TimeColumn;
-use Mediconesystems\LivewireDatatables\NumberColumn;
-use Mediconesystems\LivewireDatatables\BooleanColumn;
-use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
+use Livewire\Component;
+use Livewire\WithPagination;
 
-class Index extends LivewireDatatable
+class Index extends Component
 {
-    public $hideable = 'select';
-    public $exportable = true;
+    use WithPagination;
+    protected $paginationTheme = 'tailwind';
 
-    public function builder()
+    public $categories = [];
+    public $sortColumn = 'customer_name';
+    public $sortDirection = 'asc';
+    public $searchColumns = [
+        'id' => '',
+        'customer_name' => '',
+        'customer_email' => '',
+    ];
+
+    public function mount()
     {
-        return Order::query();
+        // $this->categories = ProductCategory::pluck('name', 'id');
     }
 
-    public function columns()
+    public function sortByColumn($column)
     {
-        return [
-            Column::checkbox(),
-            
-            NumberColumn::name('id')
-                ->label('ID')
-                ->searchable()
-                ->filterable(),
-
-            Column::name('customer_name')
-                ->label('Customer Name')
-                ->defaultSort('asc')
-                ->searchable()
-                ->editable()
-                ->filterable(),
-
-            Column::name('customer_email')
-                ->label('Customer Email')
-                ->searchable()
-                ->editable()
-                ->filterable(),
-
-                NumberColumn::name('products.id')
-                ->label('Products #')
-                ->filterable()
-        ];
+        if ($this->sortColumn == $column) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->reset('sortDirection');
+            $this->sortColumn = $column;
+        }
     }
 
-    
-    // public function getNAmesProperty()
-    // {
-    //     return Planet::pluck('name');
-    // }
-    
+    public function render()
+    {
+        $orders = Order::select([
+            'id',
+            'customer_name',
+            'customer_email',
+        ]);
+
+        foreach ($this->searchColumns as $column => $value) {
+            if (!empty($value)) {
+                $orders->where('orders.' . $column, 'LIKE', '%' . $value . '%');
+            }
+        }
+
+        $orders->orderBy($this->sortColumn, $this->sortDirection);
+
+        return view('livewire.orders.index', [
+            'orders' => $orders->paginate(5)
+        ]);
+    }
 }

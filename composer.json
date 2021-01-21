@@ -17,8 +17,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.2",
         "livewire/livewire": "^2.2",
-        "mediconesystems/livewire-datatables": "^0.4.3",
-        "rappasoft/laravel-livewire-tables": "^0.3.3"
+        "phpoffice/phpspreadsheet": "^1.16",
+        "nuovo/spreadsheet-reader": "^0.5.11"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

@@ -1,4 +1,10 @@
 <div>
+    <button class="btn btn-warning mb-2" data-toggle="modal" data-target="#csvImportModal">
+        {{ trans('global.app_csvImport') }}
+    </button>
+    @include('csvImport.modal', ['model' => 'Order', 'route' => 'orders.parseCsvImport'])
+
+
     <form action="{{ route('orders.store') }}" method="POST">
         @csrf
 
@@ -9,7 +15,6 @@
                 </div>
             @endif
         </div>
-
         <div class="form-group {{ $errors->has('customer_name') ? 'has-error' : '' }}">
             Customer name
             <input type="text" name="customer_name" class="form-control"

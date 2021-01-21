@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    use CsvImportTrait;
+
     public function create()
     {
     	return view('orders.create');

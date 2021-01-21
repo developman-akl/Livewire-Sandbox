@@ -5,6 +5,7 @@
             <th></th>
             <th>Name</th>
             <th>Category</th>
+            <th>Price</th>
         </tr>
         @foreach($products as $product)
             <tr>
@@ -13,6 +14,7 @@
                 </th>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->category->name }}</td>
+                <td>{{ $product->price }}</td>
             </tr>
         @endforeach
     </table>
